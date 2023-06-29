@@ -1,0 +1,24 @@
+---
+- name: Creates directory
+  file:
+    path: /home/{{ ansible_user }}/nginx
+    state: directory
+    mode: 0777
+- name: copy nginx.conf
+  copy:
+    src: nginx.conf
+    dest: /home/{{ ansible_user }}/nginx/nginx.conf
+- name: copy index.html
+  copy:
+    src: index.html
+    dest: /home/{{ ansible_user }}/nginx/index.html
+- name: create config nginx.conf
+  community.docker.docker_config:
+    name: nginx.conf
+    data_src: "/home/{{ ansible_user }}/nginx/nginx.conf"
+    state: present
+- name: create config index.html
+  community.docker.docker_config:
+    name: index.html
+    data_src: "/home/{{ ansible_user }}/nginx/index.html"
+    state: present

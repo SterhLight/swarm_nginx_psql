@@ -1,0 +1,7 @@
+---
+- name: reboot servers
+  hosts: all
+  become: true
+  roles:
+    - role: reboot_sv
+      tag: reboot_sv

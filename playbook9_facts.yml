@@ -1,0 +1,7 @@
+---
+- name: see facts
+  hosts: deploy
+  tasks:
+    - name: facts
+      debug:
+        msg: "{{ hostvars['server1']['ansible_facts'] }}"

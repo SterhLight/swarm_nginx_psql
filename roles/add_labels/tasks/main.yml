@@ -1,0 +1,6 @@
+---
+- name: add a label to the server
+  community.docker.docker_node:
+    hostname: sv2 #server2
+    labels:
+      key1: psql

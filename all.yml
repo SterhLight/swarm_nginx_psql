@@ -1,0 +1,32 @@
+---
+- name: build server
+  hosts: deploy
+  roles:
+    - {role: swarm_init, tags: ["swarm_init"]}
+
+- name: manager
+  hosts: managers
+  roles:
+    - {role: swarm_join_m, tags: ["swarm_join_m"]}
+
+- name: worker
+  hosts: workers
+  roles:
+    - {role: swarm_join_w, tags: ["swarm_join_w"]}
+
+- name: preparation
+  hosts: deploy
+  roles:
+    - {role: create_network, tags: ["create_network"]}
+
+- name: deploy NGINX
+  hosts: deploy #managers
+  roles:
+    - {role: create_config, tags: ["create_config"]}
+    - {role: up_nginx, tags: ["up_nginx"]}
+
+- name: deploy PostgreSQL
+  hosts: deploy #managers
+  roles:
+    - {role: add_labels, tags: ["add_labels"]}
+    - {role: up_psql, tags: ["up_psql"]}

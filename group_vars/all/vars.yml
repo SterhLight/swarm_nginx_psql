@@ -1,0 +1,6 @@
+---
+advertise_addr   : 10.10.10.101
+ansible_user     : popytaev
+network_name     : my_swarm_overlay
+nginx_vercion    : 1.13
+postgres_version : 15

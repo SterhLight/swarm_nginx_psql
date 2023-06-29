@@ -1,0 +1,12 @@
+---
+- name: deploy PostgreSQL
+  community.docker.docker_swarm_service:
+    name: MyPsql
+    image: postgres:{{ postgres_version }}
+    networks:
+      - name: "{{ network_name }}"
+    env:
+      POSTGRES_PASSWORD={{ psql.pass }}
+    placement:
+      constraints:
+        - node.labels.key1 == psql
